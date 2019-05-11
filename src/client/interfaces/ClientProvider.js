@@ -4,51 +4,38 @@
 /* eslint-disable no-underscore-dangle */
 
 exports.ClientProvider = class ClientProvider {
-  getSecureParam({
-    params,
-    paramName,
-    regexFilter,
-  }) {
+  getSecureParam({ params, paramName, regexFilter }) {
     try {
       return this._getSecureParam({
         params,
         paramName,
-        regexFilter,
+        regexFilter
       });
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  getAuthURL({
-    shop,
-    state,
-  }) {
+  getAuthURL({ secureParam, state }) {
     try {
       return this._getAuthURL({
-        shop,
-        state,
+        secureParam,
+        state
       });
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  generateAccessToken({
-    shop,
-    apiKey,
-    apiSecret,
-    code,
-    deployedURI,
-  }) {
+  generateAccessToken({ secureParam, apiKey, apiSecret, code, deployedURI }) {
     return new Promise((resolve, reject) => {
       try {
         return this._generateAccessToken({
-          shop,
+          secureParam,
           apiKey,
           apiSecret,
           code,
-          deployedURI,
+          deployedURI
         })
           .then(resolve)
           .catch(reject);
@@ -61,14 +48,14 @@ exports.ClientProvider = class ClientProvider {
   // INTERFACE IMPLEMENTATIONS
 
   _getSecureParam(...args) {
-    throw new Error('ClientProvider._getSecureParam undefined');
+    throw new Error("ClientProvider._getSecureParam undefined");
   }
 
   _getAuthURL(...args) {
-    throw new Error('ClientProvider._getAuthURL undefined');
+    throw new Error("ClientProvider._getAuthURL undefined");
   }
 
   _generateAccessToken(...args) {
-    throw new Error('ClientProvider._generateAccessToken undefined');
+    throw new Error("ClientProvider._generateAccessToken undefined");
   }
 };

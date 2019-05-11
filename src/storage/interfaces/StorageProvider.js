@@ -16,10 +16,10 @@ exports.StorageProvider = class StorageProvider {
     });
   }
 
-  storeValue(shop, nonce) {
+  storeValue(secureParam, nonce) {
     return new Promise((resolve, reject) => {
       try {
-        return this._storeValue(shop, nonce)
+        return this._storeValue(secureParam, nonce)
           .then(resolve)
           .catch(reject);
       } catch (error) {
@@ -28,10 +28,10 @@ exports.StorageProvider = class StorageProvider {
     });
   }
 
-  retreiveValue(shop, nonce) {
+  retrieveValue(secureParam, nonce) {
     return new Promise((resolve, reject) => {
       try {
-        return this._retreiveValue(shop, nonce)
+        return this._retrieveValue(secureParam, nonce)
           .then(resolve)
           .catch(reject);
       } catch (error) {
@@ -40,10 +40,10 @@ exports.StorageProvider = class StorageProvider {
     });
   }
 
-  removeValue(shop) {
+  removeValue(secureParam) {
     return new Promise((resolve, reject) => {
       try {
-        return this._removeValue(shop)
+        return this._removeValue(secureParam)
           .then(resolve)
           .catch(reject);
       } catch (error) {
@@ -55,18 +55,18 @@ exports.StorageProvider = class StorageProvider {
   // INTERFACE IMPLEMENTATIONS
 
   _setup(...args) {
-    throw new Error('StorageProvider._setup undefined');
+    throw new Error("StorageProvider._setup undefined");
   }
 
   _storeValue(...args) {
-    throw new Error('StorageProvider._storeValue undefined');
+    throw new Error("StorageProvider._storeValue undefined");
   }
 
-  _retreiveValue(...args) {
-    throw new Error('StorageProvider._retreiveValue undefined');
+  _retrieveValue(...args) {
+    throw new Error("StorageProvider._retrieveValue undefined");
   }
 
   _removeValue(...args) {
-    throw new Error('StorageProvider._removeValue undefined');
+    throw new Error("StorageProvider._removeValue undefined");
   }
 };
