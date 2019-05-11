@@ -9,7 +9,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: shopify-oauth-{{ checksum "package.json" }}
+          key: serverless-oauth-{{ checksum "package.json" }}
   test:
     docker:
       - image: 'circleci/node:lts'
@@ -17,7 +17,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - shopify-oauth-{{ checksum "package.json" }}
+            - serverless-oauth-{{ checksum "package.json" }}
       - run: yarn clean-install
       - run: yarn test
   release:
@@ -27,7 +27,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - shopify-oauth-{{ checksum "package.json" }}
+            - serverless-oauth-{{ checksum "package.json" }}
       - run: yarn clean-install
       - run: npx semantic-release
 workflows:
