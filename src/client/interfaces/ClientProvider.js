@@ -9,7 +9,7 @@ exports.ClientProvider = class ClientProvider {
       return this._getSecureParam({
         params,
         paramName,
-        regexFilter
+        regexFilter,
       });
     } catch (error) {
       throw new Error(error);
@@ -20,14 +20,20 @@ exports.ClientProvider = class ClientProvider {
     try {
       return this._getAuthURL({
         secureParam,
-        state
+        state,
       });
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  generateAccessToken({ secureParam, apiKey, apiSecret, code, deployedURI }) {
+  generateAccessToken({
+    secureParam,
+    apiKey,
+    apiSecret,
+    code,
+    deployedURI,
+  }) {
     return new Promise((resolve, reject) => {
       try {
         return this._generateAccessToken({
@@ -35,7 +41,7 @@ exports.ClientProvider = class ClientProvider {
           apiKey,
           apiSecret,
           code,
-          deployedURI
+          deployedURI,
         })
           .then(resolve)
           .catch(reject);
@@ -48,14 +54,14 @@ exports.ClientProvider = class ClientProvider {
   // INTERFACE IMPLEMENTATIONS
 
   _getSecureParam(...args) {
-    throw new Error("ClientProvider._getSecureParam undefined");
+    throw new Error('ClientProvider._getSecureParam undefined');
   }
 
   _getAuthURL(...args) {
-    throw new Error("ClientProvider._getAuthURL undefined");
+    throw new Error('ClientProvider._getAuthURL undefined');
   }
 
   _generateAccessToken(...args) {
-    throw new Error("ClientProvider._generateAccessToken undefined");
+    throw new Error('ClientProvider._generateAccessToken undefined');
   }
 };

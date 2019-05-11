@@ -55,18 +55,18 @@ exports.StorageProvider = class StorageProvider {
   // INTERFACE IMPLEMENTATIONS
 
   _setup(...args) {
-    throw new Error("StorageProvider._setup undefined");
+    throw new Error('StorageProvider._setup undefined');
   }
 
   _storeValue(...args) {
-    throw new Error("StorageProvider._storeValue undefined");
+    throw new Error('StorageProvider._storeValue undefined');
   }
 
   _retrieveValue(...args) {
-    throw new Error("StorageProvider._retrieveValue undefined");
+    throw new Error('StorageProvider._retrieveValue undefined');
   }
 
   _removeValue(...args) {
-    throw new Error("StorageProvider._removeValue undefined");
+    throw new Error('StorageProvider._removeValue undefined');
   }
 };

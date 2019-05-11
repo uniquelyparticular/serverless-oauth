@@ -23,7 +23,6 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "micro-dev",
-    "precommit": "pretty-quick --staged",
     "start": "micro",
     "clean-install": "yarn install --force",
     "test": "jest",
