@@ -30,11 +30,6 @@
     "semantic-release": "semantic-release",
     "lint": "eslint src"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "dependencies": {
     "@particular./shopify-request": "^1.2.0",
     "crypto": "^1.0.1",
