@@ -4,12 +4,6 @@
 /* eslint-disable no-underscore-dangle */
 
 exports.StorageProvider = class StorageProvider {
-  // constructor() {
-  //   if (!this.store) {
-  //     throw new Error('Must have a store!');
-  //   }
-  // }
-
   setup() {
     return new Promise((resolve, reject) => {
       try {
