@@ -3,7 +3,7 @@
 const { send } = require('micro');
 const { toJSON, proccessHmac } = require('../utils');
 const { Storage } = require('../storage');
-const { Client } = require('../client');
+const { Auth } = require('../auth');
 
 const apiKey = process.env.SHOPIFY_API_KEY;
 const apiSecret = process.env.SHOPIFY_API_SECRET;
@@ -17,16 +17,14 @@ exports.route = async (req, res) => {
 
   try {
     const { hmac, code, state } = req.query;
-    const storageProvider = new Storage();
-    const { store } = storageProvider;
-    const clientProvider = new Client();
-    const { client } = clientProvider;
-    const secureParam = client.getSecureParam({
+    const { provider: storage } = new Storage();
+    const { provider: auth } = new Auth();
+
+    const secureParam = auth.getSecureParam({
       params: req.query,
     });
     if (secureParam && hmac && code && state) {
-      await store.setup();
-      const credentials = await store
+      const credentials = await storage
         .retrieveValue(secureParam, state)
         .then(() => proccessHmac({
           req,
@@ -35,7 +33,7 @@ exports.route = async (req, res) => {
         }))
         .then((validHmac) => {
           if (validHmac) {
-            return client.generateAccessToken({
+            return auth.generateAccessToken({
               secureParam,
               apiKey,
               apiSecret,

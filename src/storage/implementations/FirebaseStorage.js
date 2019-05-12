@@ -5,37 +5,29 @@
 const firebase = require('firebase');
 require('firebase/firestore');
 
-const { StorageProvider } = require('./interfaces/StorageProvider');
+const { StorageProvider } = require('../interfaces/StorageProvider');
 
-exports.FirebaseStore = class FirebaseStore extends StorageProvider {
-  _setup() {
-    const _this = this;
-    return new Promise((resolve, reject) => {
-      try {
-        if (!firebase.apps.length) {
-          firebase.initializeApp({
-            apiKey: process.env.FIREBASE_API_KEY,
-            authDomain: `${process.env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
-            projectId: process.env.FIREBASE_PROJECT_ID,
-          });
-        }
-        _this.store = firebase.firestore();
-        resolve(true);
-      } catch (err) {
-        reject(new Error(err));
-      }
-    });
+exports.FirebaseStorage = class FirebaseStorage extends StorageProvider {
+  constructor() {
+    if (!firebase.apps.length) {
+      firebase.initializeApp({
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: `${process.env.FIREBASE_PROJECT_ID}.firebaseapp.com`,
+        projectId: process.env.FIREBASE_PROJECT_ID,
+      });
+    }
+    super(firebase.firestore());
   }
 
   _storeValue(secureParam, nonce) {
-    return this.store
+    return this.provider
       .collection('OAuth')
       .doc(secureParam)
       .set({ nonce });
   }
 
   _retrieveValue(secureParam, nonce) {
-    return this.store
+    return this.provider
       .collection('OAuth')
       .doc(secureParam)
       .get()
@@ -51,7 +43,7 @@ exports.FirebaseStore = class FirebaseStore extends StorageProvider {
   }
 
   _removeValue(secureParam) {
-    return this.store
+    return this.provider
       .collection('OAuth')
       .doc(secureParam)
       .delete()

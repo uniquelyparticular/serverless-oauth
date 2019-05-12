@@ -10,11 +10,7 @@ exports.toJSON = error => (!error
     { type: 'error' },
   ));
 
-exports.proccessHmac = ({
-  req,
-  hmac,
-  apiSecret,
-}) => new Promise((resolve, reject) => {
+exports.proccessHmac = ({ req, hmac, apiSecret }) => new Promise((resolve, reject) => {
   const params = {};
   Object.keys(req.query)
     .sort()
