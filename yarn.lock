@@ -6731,7 +6731,7 @@ sax@^1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-semantic-release@^15.13.13:
+semantic-release@15.13.13:
   version "15.13.13"
   resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.13.13.tgz#3ffcc20e4b737a7d8db3555d69a0d8478e13ba71"
   integrity sha512-KXFEj9CaeFsqSaS01wG9fiiyyYIRiTO2cxeF2pZub5+U7UE2c9qNxalZiYvZ/1sIbDFJ1FLDLa5x7XWU9+lJ8w==
