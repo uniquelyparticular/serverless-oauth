@@ -3,7 +3,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 
-exports.ClientProvider = class ClientProvider {
+exports.AuthProvider = class AuthProvider {
+  constructor(authProvider) {
+    if (!authProvider) {
+      throw new Error('Missing AuthProvider client in constructor');
+    }
+    this.provider = authProvider;
+    // console.log('AuthProvider.provider', this.provider);
+  }
+
   getSecureParam({ params, paramName, regexFilter }) {
     try {
       return this._getSecureParam({
@@ -28,11 +36,7 @@ exports.ClientProvider = class ClientProvider {
   }
 
   generateAccessToken({
-    secureParam,
-    apiKey,
-    apiSecret,
-    code,
-    deployedURI,
+    secureParam, apiKey, apiSecret, code, deployedURI,
   }) {
     return new Promise((resolve, reject) => {
       try {
@@ -54,14 +58,14 @@ exports.ClientProvider = class ClientProvider {
   // INTERFACE IMPLEMENTATIONS
 
   _getSecureParam(...args) {
-    throw new Error('ClientProvider._getSecureParam undefined');
+    throw new Error('AuthProvider._getSecureParam undefined');
   }
 
   _getAuthURL(...args) {
-    throw new Error('ClientProvider._getAuthURL undefined');
+    throw new Error('AuthProvider._getAuthURL undefined');
   }
 
   _generateAccessToken(...args) {
-    throw new Error('ClientProvider._generateAccessToken undefined');
+    throw new Error('AuthProvider._generateAccessToken undefined');
   }
 };

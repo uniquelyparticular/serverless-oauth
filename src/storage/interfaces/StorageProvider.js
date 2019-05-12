@@ -4,16 +4,12 @@
 /* eslint-disable no-underscore-dangle */
 
 exports.StorageProvider = class StorageProvider {
-  setup() {
-    return new Promise((resolve, reject) => {
-      try {
-        return this._setup()
-          .then(resolve)
-          .catch(reject);
-      } catch (error) {
-        reject(error);
-      }
-    });
+  constructor(storageProvider) {
+    if (!storageProvider) {
+      throw new Error('Missing StorageProvider client in constructor');
+    }
+    this.provider = storageProvider;
+    // console.log('StorageProvider.provider', this.provider);
   }
 
   storeValue(secureParam, nonce) {

@@ -2,15 +2,15 @@
 
 'use strict';
 
-const { FirebaseStore } = require('./firebase');
+const { FirebaseStorage } = require('./implementations/FirebaseStorage');
 
 exports.Storage = class Storage {
   constructor() {
-    // perform logic on which store to choose here
-    this._store = new FirebaseStore();
+    // TODO: perform logic on which StorageProvider to choose here
+    this._provider = new FirebaseStorage();
   }
 
-  get store() {
-    return this._store;
+  get provider() {
+    return this._provider;
   }
 };
