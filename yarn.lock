@@ -514,7 +514,7 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
-"@particular./shopify-request@^1.3.3":
+"@particular./shopify-request@1.3.3":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@particular./shopify-request/-/shopify-request-1.3.3.tgz#2461841c7cf2d6221bdce942066f3b3bbc7b565b"
   integrity sha512-G2JvhOXJD23lgNbcTxc/htGxDGr/jkySvtNdWnw6ZZMO4qJh+BfgImWLIORSTAky27kMSyuQbDrV0EN6yTNfQA==
@@ -2732,7 +2732,7 @@ find-versions@^3.0.0:
     array-uniq "^2.1.0"
     semver-regex "^2.0.0"
 
-firebase@^6.0.4:
+firebase@6.0.4:
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-6.0.4.tgz#fe4696c06e8dfb90c875681bfe8b1a3622f7d5ee"
   integrity sha512-y/A30wf9MQU4Ca/2WUiPdCNWCB/3WMFgwrqmOCV5NDK2tkPC5Ls7uswTzsx9eWMlj4FvqbmbDpXlgio24ePVhw==
