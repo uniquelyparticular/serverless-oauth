@@ -8,9 +8,8 @@ const _firebaseConfig = {
   type: 'service_account',
   project_id: process.env.FIREBASE_PROJECT_ID,
   private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-  private_key: `-----BEGIN PRIVATE KEY-----${
-    process.env.FIREBASE_PRIVATE_KEY
-  }-----END PRIVATE KEY-----\n`.replace(/\\n/g, '\n'),
+  // eslint-disable-next-line no-use-before-define
+  private_key: wrapKeyData(process.env.FIREBASE_PRIVATE_KEY, 'PRIVATE'),
   client_email: `firebase-adminsdk-3gpvn@${
     process.env.FIREBASE_PROJECT_ID
   }.iam.gserviceaccount.com`,
@@ -22,6 +21,12 @@ const _firebaseConfig = {
     process.env.FIREBASE_PROJECT_ID
   }.iam.gserviceaccount.com`,
 };
+
+const wrapKeyData = (keyData, keyType = 'RSA PRIVATE') => `-----BEGIN ${keyType} KEY-----${keyData.replace(
+  // eslint-disable-next-line no-useless-escape
+  /\"/g,
+  '',
+)}-----END ${keyType} KEY-----\n`.replace(/\\n/g, '\n');
 
 // console.log('process.env.FIREBASE_CLIENT_ID',process.env.FIREBASE_CLIENT_ID)
 // console.log('process.env.FIREBASE_PROJECT_ID',process.env.FIREBASE_PROJECT_ID)
