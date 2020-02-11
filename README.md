@@ -111,23 +111,28 @@ https://github.com/uniquelyparticular/shopify-request.
 Create storefront access token using postman
 
 API URL: https://{{host}}/admin/api/2020-01/storefront_access_tokens.json
+
+```js
 Header: X-Shopify-Access-Token = `access_token`
 Body: {
-"storefront_access_token": {
-"title": "Test"
+  "storefront_access_token": {
+    "title": "Test"
+  }
 }
-}
+```
 
+```js
 Response: {
-"storefront_access_token": {
-"access_token": "...",
-"access_scope": "..., ..., ...",
-"created_at": "2020-02-11T16:41:17-05:00",
-"id": "...",
-"admin_graphql_api_id": "gid://shopify/StorefrontAccessToken/{{id}}",
-"title": "Test"
+  "storefront_access_token": {
+    "access_token": "...",
+    "access_scope": "..., ..., ...",
+    "created_at": "2020-02-11T16:41:17-05:00",
+    "id": "...",
+    "admin_graphql_api_id": "gid://shopify/StorefrontAccessToken/{{id}}",
+    "title": "Test"
+  }
 }
-}
+```
 
 ```js
 const { createClient } = require('@particular./shopify-request');
