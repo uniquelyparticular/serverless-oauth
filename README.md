@@ -74,6 +74,13 @@ In the `Whitelisted redirection URL(s)` field, be sure to enter your `ngrok URL`
 
 Click the `Create app` button to create your App Credentials and find your `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET`.
 
+Configure App setup to making app a sales channel
+
+From your app's overview screen, click `App setup`
+In the Sales channel section, click `Turn app into sales channel`
+Click `Turn app into sales channel again` to confirm that you want to convert your app into a sales channel
+Click `Save`
+
 ## 📦 Package
 
 Run the following command to build the app
@@ -100,6 +107,27 @@ Open the `Test your app` accordian button > Select a store from the dropdown > C
 
 **NOTE**: this repository works extremely well with our `@particular./shopify-auth` package which is available via `npm` or at:
 https://github.com/uniquelyparticular/shopify-request.
+
+Create storefront access token using postman
+
+API URL: https://{{host}}/admin/api/2020-01/storefront_access_tokens.json
+Header: X-Shopify-Access-Token = `access_token`
+Body: {
+"storefront_access_token": {
+"title": "Test"
+}
+}
+
+Response: {
+"storefront_access_token": {
+"access_token": "...",
+"access_scope": "..., ..., ...",
+"created_at": "2020-02-11T16:41:17-05:00",
+"id": "...",
+"admin_graphql_api_id": "gid://shopify/StorefrontAccessToken/{{id}}",
+"title": "Test"
+}
+}
 
 ```js
 const { createClient } = require('@particular./shopify-request');
