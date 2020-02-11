@@ -26,6 +26,7 @@ Create a `.env` at the project root with the following credentials:
 ```dosini
 DEPLOYED_URI
 FIREBASE_PROJECT_ID
+FIREBASE_SERVICE_ACCOUNT
 FIREBASE_CLIENT_ID
 FIREBASE_PRIVATE_KEY_ID
 FIREBASE_PRIVATE_KEY
@@ -43,12 +44,21 @@ Open the [Firebase Console](https://console.firebase.google.com) to create a new
 Go into the `Settings` for your new project (click gear icon) and click on `Service Accounts` tab. Click the `Generate new private key` button to download a JSON file containing your Service Account credentials.
 
 From that JSON file, copy the following to your env entries:
+
 `project_id` >> `FIREBASE_PROJECT_ID`
+
 `client_id` >> `FIREBASE_CLIENT_ID`
+
 `private_key_id` >> `FIREBASE_PRIVATE_KEY_ID`
+
+Set the portion of the `client_email` value before the @ symbol as the value of `FIREBASE_SERVICE_ACCOUNT`.
+
+`"client_email": "<<firebase_service_account>>@PROJECT_ID.iam.gserviceaccount.com"` to set `FIREBASE_SERVICE_ACCOUNT` as the value of `firebase_service_account`
 
 Grab the value of the key containing between `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----\n` to set as the value of `FIREBASE_PRIVATE_KEY`
 \*If deploying to Zeit Now instead of ngrok, make sure to replace `\n` in the string w/ `\\n` before storing as a secret.
+
+Go to `Database` page within `Develop` to setup an initial database
 
 ---
 
