@@ -4,6 +4,7 @@ const { send } = require('micro');
 const { toJSON, proccessHmac } = require('../utils');
 const { Storage } = require('../storage');
 const { Auth } = require('../auth');
+const accessTokenView = require('../view/accessToken');
 
 const apiKey = process.env.SHOPIFY_API_KEY;
 const apiSecret = process.env.SHOPIFY_API_SECRET;
@@ -46,7 +47,8 @@ exports.route = async (req, res) => {
         .then(token => token);
 
       if (credentials.access_token) {
-        return send(res, 200, credentials);
+        // return send(res, 200, credentials);
+        return send(res, 200, accessTokenView(credentials));
       }
       return send(res, 400, { error: 'Unable to validate2' });
     }
