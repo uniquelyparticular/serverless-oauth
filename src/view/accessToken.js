@@ -55,17 +55,26 @@ module.exports = token => `<!DOCTYPE html>
     </style>
     <script>
       function copy() {
-        const copyText = document.getElementById('accessToken')
-        const tooltip = document.getElementsByClassName('c-tooltip--light')[0]
-
-        copyText.select();
-        copyText.setSelectionRange(0, 99999)
-
-        document.execCommand("copy");
-
-        tooltip.classList.remove("c-tooltip--hide");
+        const copyText = document.getElementById('accessToken');
+        const tooltip = document.getElementsByClassName('c-tooltip--light')[0];
+    
+        if (document.execCommand && document.queryCommandSupported('copy') && copyText && copyText.value) {
+          const range = document.createRange();
+          range.selectNode(copyText);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          
+          copyText.select();
+          
+          copyText.focus();
+          document.execCommand('selectall');
+    
+          document.execCommand('copy');
+        }
+    
+        tooltip.classList.remove('c-tooltip--hide');
         setTimeout(function() {
-          tooltip.classList.add("c-tooltip--hide");
+          tooltip.classList.add('c-tooltip--hide');
         }, 500)
       }
     </script>
