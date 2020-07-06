@@ -4,29 +4,28 @@
 
 const admin = require('firebase-admin');
 
+const wrapKeyData = (keyData, keyType = 'RSA PRIVATE') => `-----BEGIN ${keyType} KEY-----${keyData.replace(
+  // eslint-disable-next-line no-useless-escape
+  /\"/g,
+  '',
+)}-----END ${keyType} KEY-----\n`.replace(/\\n/g, '\n');
+
 const _firebaseConfig = {
   type: 'service_account',
   project_id: process.env.FIREBASE_PROJECT_ID,
   private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-  // eslint-disable-next-line no-use-before-define
   private_key: wrapKeyData(process.env.FIREBASE_PRIVATE_KEY, 'PRIVATE'),
-  client_email: `firebase-adminsdk-3gpvn@${
+  client_email: `${process.env.FIREBASE_SERVICE_ACCOUNT}@${
     process.env.FIREBASE_PROJECT_ID
   }.iam.gserviceaccount.com`,
   client_id: process.env.FIREBASE_CLIENT_ID,
   auth_uri: 'https://accounts.google.com/o/oauth2/auth',
   token_uri: 'https://oauth2.googleapis.com/token',
   auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-  client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3gpvn%40${
-    process.env.FIREBASE_PROJECT_ID
-  }.iam.gserviceaccount.com`,
+  client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/${
+    process.env.FIREBASE_SERVICE_ACCOUNT
+  }%40${process.env.FIREBASE_PROJECT_ID}.iam.gserviceaccount.com`,
 };
-
-const wrapKeyData = (keyData, keyType = 'RSA PRIVATE') => `-----BEGIN ${keyType} KEY-----${keyData.replace(
-  // eslint-disable-next-line no-useless-escape
-  /\"/g,
-  '',
-)}-----END ${keyType} KEY-----\n`.replace(/\\n/g, '\n');
 
 // console.log('process.env.FIREBASE_CLIENT_ID',process.env.FIREBASE_CLIENT_ID)
 // console.log('process.env.FIREBASE_PROJECT_ID',process.env.FIREBASE_PROJECT_ID)

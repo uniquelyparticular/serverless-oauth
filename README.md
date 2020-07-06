@@ -26,6 +26,7 @@ Create a `.env` at the project root with the following credentials:
 ```dosini
 DEPLOYED_URI
 FIREBASE_PROJECT_ID
+FIREBASE_SERVICE_ACCOUNT
 FIREBASE_CLIENT_ID
 FIREBASE_PRIVATE_KEY_ID
 FIREBASE_PRIVATE_KEY
@@ -43,12 +44,21 @@ Open the [Firebase Console](https://console.firebase.google.com) to create a new
 Go into the `Settings` for your new project (click gear icon) and click on `Service Accounts` tab. Click the `Generate new private key` button to download a JSON file containing your Service Account credentials.
 
 From that JSON file, copy the following to your env entries:
+
 `project_id` >> `FIREBASE_PROJECT_ID`
+
 `client_id` >> `FIREBASE_CLIENT_ID`
+
 `private_key_id` >> `FIREBASE_PRIVATE_KEY_ID`
+
+Set the portion of the `client_email` value before the @ symbol as the value of `FIREBASE_SERVICE_ACCOUNT`.
+
+`"client_email": "<<firebase_service_account>>@PROJECT_ID.iam.gserviceaccount.com"` to set `FIREBASE_SERVICE_ACCOUNT` as the value of `firebase_service_account`
 
 Grab the value of the key containing between `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----\n` to set as the value of `FIREBASE_PRIVATE_KEY`
 \*If deploying to Zeit Now instead of ngrok, make sure to replace `\n` in the string w/ `\\n` before storing as a secret.
+
+Go to `Database` page within `Develop` to setup an initial database
 
 ---
 
@@ -63,6 +73,13 @@ In the `App URL` field, be sure to enter your `ngrok URL` (provided above) follo
 In the `Whitelisted redirection URL(s)` field, be sure to enter your `ngrok URL` (provided above) followed by `/auth/callback` such that `App URL` looks something like `https://312a9670.ngrok.io/auth/callback`.
 
 Click the `Create app` button to create your App Credentials and find your `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET`.
+
+Configure App setup to making app a sales channel
+
+From your app's overview screen, click `App setup`
+In the Sales channel section, click `Turn app into sales channel`
+Click `Turn app into sales channel again` to confirm that you want to convert your app into a sales channel
+Click `Save`
 
 ## 📦 Package
 
@@ -90,6 +107,32 @@ Open the `Test your app` accordian button > Select a store from the dropdown > C
 
 **NOTE**: this repository works extremely well with our `@particular./shopify-auth` package which is available via `npm` or at:
 https://github.com/uniquelyparticular/shopify-request.
+
+Create storefront access token using postman
+
+API URL: https://{{host}}/admin/api/2020-01/storefront_access_tokens.json
+
+```js
+Header: X-Shopify-Access-Token = `access_token`
+Body: {
+  "storefront_access_token": {
+    "title": "Test"
+  }
+}
+```
+
+```js
+Response: {
+  "storefront_access_token": {
+    "access_token": "...",
+    "access_scope": "..., ..., ...",
+    "created_at": "2020-02-11T16:41:17-05:00",
+    "id": "...",
+    "admin_graphql_api_id": "gid://shopify/StorefrontAccessToken/{{id}}",
+    "title": "Test"
+  }
+}
+```
 
 ```js
 const { createClient } = require('@particular./shopify-request');
