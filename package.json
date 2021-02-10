@@ -63,7 +63,7 @@
     "eslint-plugin-jest": "22.6.4",
     "husky": "2.4.0",
     "jest": "24.8.0",
-    "lint-staged": "8.2.0",
+    "lint-staged": "10.5.4",
     "micro-dev": "3.0.0",
     "prettier": "1.17.1",
     "pretty-quick": "1.11.0",
